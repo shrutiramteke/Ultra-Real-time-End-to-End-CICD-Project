@@ -14,7 +14,7 @@ public class DemoApplicationTests {
 	@GetMapping
 	public String message() {
 		System.out.println("Welcome");
-		return "welcome to mr.dvops.youtube.channel";
+		return "welcome to our project";
 	}
 
 	public static void main(String[] args) {
