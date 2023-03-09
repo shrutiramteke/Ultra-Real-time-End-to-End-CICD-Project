@@ -44,7 +44,7 @@ pipeline{
                 sh "docker push shrutiramteke/webapp:${DOCKER_TAG} "
             }
         }
-       stage('docker build & docker push to Nexus repo'){
+       stage('docker push to Nexus repo'){
             steps{
                 script{
                     withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
