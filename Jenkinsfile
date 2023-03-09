@@ -44,19 +44,17 @@ pipeline{
                 sh "docker push shrutiramteke/webapp:${DOCKER_TAG} "
             }
         }
-
-        stage('docker push to Nexus repo'){
-             steps{
-                 script{
+       stage('docker build & docker push to Nexus repo'){
+            steps{
+                script{
                     withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
-    // some block
-}
-                    sh '''
-                    docker build -t 13.231.143.42:8083
-                    '''
+                        sh '''
+                         docker build -t 13.231.143.42:8083
+                        '''
+                    }
                 }
-             }
-         }
+            }
+        }
     }
 }
 def getVersion(){
