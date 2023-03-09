@@ -31,17 +31,17 @@ pipeline{
         
         stage('Docker Build'){
             steps{
-                sh "docker build . -t ShrutiRamteke/webapp:${DOCKER_TAG} "
+                sh "docker build . -t shrutiramteke/webapp:${DOCKER_TAG} "
             }
         }
         
         stage('DockerHub Push'){
             steps{
                 withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
-                    sh "docker login -u ShrutiRamteke -p ${dockerhubpwd}"
+                    sh "docker login -u shrutiramteke -p ${dockerhubpwd}"
                 }
                 
-                sh "docker push ShrutiRamteke/webapp:${DOCKER_TAG} "
+                sh "docker push shrutiramteke/webapp:${DOCKER_TAG} "
             }
         }
 
