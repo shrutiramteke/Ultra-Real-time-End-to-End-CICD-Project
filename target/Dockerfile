@@ -1,8 +1,7 @@
 FROM maven as build 
 WORKDIR /demo
 COPY . .
-RUN mvn install:install-file "-Dfile=your-artifact-1.0.jar" "-DpomFile=your-pom.xml" "-Dsources=src.jar" "-Djavadoc=apidocs.jar" "-DgroupId=org.some.group" "-DartifactId=your-artifact" "-Dversion=1.0" "-Dpackaging=jar" "-Dclassifier=sources" "-DgeneratePom=true" "-DcreateChecksum=true"
-
+RUN mvn install
 FROM openjdk:11.0
 WORKDIR /demo
 COPY --from=build /demo/target/demo.jar /demo/
