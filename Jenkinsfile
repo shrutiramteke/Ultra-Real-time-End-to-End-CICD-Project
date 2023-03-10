@@ -30,45 +30,45 @@ pipeline{
             }
         }
         
-//         stage('Docker Build'){
-//             steps{
-//                 sh "docker build . -t shrutiramteke/webapp:${DOCKER_TAG} "
-//             }
-//         }
+        stage('Docker Build'){
+            steps{
+                sh "docker build . -t shrutiramteke/webapp:${DOCKER_TAG} "
+            }
+        }
         
-//         stage('DockerHub Push'){
-//             steps{
-//                 withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
-//                     sh "docker login -u shrutiramteke -p ${dockerhubpwd}"
-//                 }
+        stage('DockerHub Push'){
+            steps{
+                withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
+                    sh "docker login -u shrutiramteke -p ${dockerhubpwd}"
+                }
                 
-//                 sh "docker push shrutiramteke/webapp:${DOCKER_TAG} "
-//             }
-//         }
-//        stage('docker push to Nexus repo'){
-//             steps{
-//                 script{
-//                     withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
-//                         sh '''
-//                          docker build -t 13.231.143.42:8083/springapp:${VERSION} .
-//                          docker login -u admin -p $nexus_creds 13.231.143.42:8083
-//                          docker push 13.231.143.42:8083/springapp:${VERSION}
-//                          docker rmi 13.231.143.42:8083/springapp:${VERSION}
-//                         '''
-//                     }
-//                 }
-//             }
-//         }
+                sh "docker push shrutiramteke/webapp:${DOCKER_TAG} "
+            }
+        }
+       stage('docker push to Nexus repo'){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'nexus_passwd', variable: 'nexus_creds')]) {
+                        sh '''
+                         docker build -t 13.231.143.42:8083/springapp:${VERSION} .
+                         docker login -u admin -p $nexus_creds 13.231.143.42:8083
+                         docker push 13.231.143.42:8083/springapp:${VERSION}
+                         docker rmi 13.231.143.42:8083/springapp:${VERSION}
+                        '''
+                    }
+                }
+            }
+        }
 	    
-// 	  stage('Identifying misconfigs using datree in helm charts'){
-//                 steps{
-//                      script{   
-// 	                 dir('kubernetes/myapp/') {
-//                            sh 'helm datree test .'
-//                                }
-// 		          }
-// 	           }
-// 	  }
+	  stage('Identifying misconfigs using datree in helm charts'){
+                steps{
+                     script{   
+	                 dir('kubernetes/myapp/') {
+                           sh 'helm datree test .'
+                               }
+		          }
+	           }
+	  }
     }
     
     post {
