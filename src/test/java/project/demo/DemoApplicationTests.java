@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 
 public class DemoApplicationTests {
-
 	@GetMapping
 	public String message() {
 <<<<<<< HEAD
 
 =======
->>>>>>> 4541ad16ac649f142797606e4d26138e72fa048b
+>>>>>>> 4541ad16ac649f142797606e4d26138e72fa048b;
 		return "welcome to our project";
 	}
 
